@@ -72,13 +72,12 @@ class BFA(Attack):
         targets = F.one_hot(labels.type(torch.int64), self.num_classes).float().to(self.device)
         for _ in range(self.ensemble_number):
             g = self.get_maskgrad(images_masked, labels)
+            # get fitted image
             images_masked = self.normalize(images_denorm + self.eta * g)
             logits = self.model(images_masked)
             loss = torch.sum(logits * targets, dim=1).mean()
-            # loss = self.loss_fn_ce(logits, labels)
             aggregate_grad += torch.autograd.grad(loss, self.feature_maps)[0]
         aggregate_grad /= -torch.sqrt(torch.sum(torch.square(aggregate_grad), dim=(1, 2, 3), keepdim=True))
-        # aggregate_grad /= torch.sqrt(torch.sum(torch.square(aggregate_grad), dim=(1, 2, 3), keepdim=True))
         return aggregate_grad
 
     def bfa_loss_function(self, aggregate_grad: Tensor, x: Tensor) -> Tensor:
