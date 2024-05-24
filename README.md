@@ -10,7 +10,7 @@ Maoyuan Wang, Jinwei Wang, Bin Ma, Xiangyang Luo.
 
 The size of images is set to 299x299.
 
-Find the class folders in a dataset structured as follows::
+Find the class folders in a dataset structured as follows:
 
 ### Caltech-256
 
