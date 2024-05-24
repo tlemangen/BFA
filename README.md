@@ -1,3 +1,5 @@
+# BFA
+
 This repository contains the PyTorch code for the paper:
 
 [Improving the transferability of adversarial examples through black-box feature attacks](https://www.sciencedirect.com/science/article/pii/S0925231224006349?via%3Dihub) (Neurocomputing 2024)
@@ -149,3 +151,18 @@ imagenette_transform = T.Compose([
 ## BFA
 
 > `python eval.py --ds=nips2017 --model=inception_v3 --pkg=pytorch --bs=32 --attack=BFA`
+
+## Citation
+
+If you find the idea or code useful for your research, please consider citing our paper:
+
+```text
+@article{wang2024improving,
+  title={Improving the transferability of adversarial examples through black-box feature attacks},
+  author={Wang, Maoyuan and Wang, Jinwei and Ma, Bin and Luo, Xiangyang},
+  journal={Neurocomputing},
+  pages={127863},
+  year={2024},
+  publisher={Elsevier}
+}
+```
