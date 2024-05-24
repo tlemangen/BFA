@@ -81,11 +81,9 @@ class BFA(Attack):
         # aggregate_grad /= torch.sqrt(torch.sum(torch.square(aggregate_grad), dim=(1, 2, 3), keepdim=True))
         return aggregate_grad
 
-    def fia_loss_function(self, aggregate_grad: Tensor, x: Tensor) -> Tensor:
+    def bfa_loss_function(self, aggregate_grad: Tensor, x: Tensor) -> Tensor:
         _ = self.model(x)
         fia_loss = torch.mean(torch.sum(aggregate_grad * self.feature_maps, dim=(1, 2, 3)))
-        # fia_loss = torch.mean(
-        #     torch.sum(aggregate_grad * self.feature_maps / torch.numel(self.feature_maps[0]), dim=(1, 2, 3)))
         return fia_loss
 
     def forward(self, images: Tensor, labels: Tensor) -> Tensor:
@@ -98,7 +96,7 @@ class BFA(Attack):
         aggregate_grad = self.get_aggregate_gradient(images, labels)
         for _ in range(self.steps):
             adv.requires_grad = True
-            fia_loss = self.fia_loss_function(aggregate_grad, adv)
+            fia_loss = self.bfa_loss_function(aggregate_grad, adv)
             grad = torch.autograd.grad(fia_loss, adv)[0]
             g = self.decay * g + grad / torch.mean(torch.abs(grad), dim=(1, 2, 3), keepdim=True)
             adv = torch.clamp(adv + self.alpha * torch.sign(g), min=box_min, max=box_max).detach()
