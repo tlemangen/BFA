@@ -1,0 +1,7 @@
+classifier:
+{model package}_{model name}_{model version}_{dataset}
+e.g., pytorch_inception_v3_caltech256
+
+attack's generator:
+{surrogate model package}_{surrogate model name}_{surrogate model version}_{attack name}_{generator name}
+e.g., pytorch_inception_v3_caltech256_gap_resnet_generator.pth
