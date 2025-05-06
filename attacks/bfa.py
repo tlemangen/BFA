@@ -77,6 +77,7 @@ class BFA(Attack):
             logits = self.model(images_masked)
             loss = torch.sum(logits * targets, dim=1).mean()
             aggregate_grad += torch.autograd.grad(loss, self.feature_maps)[0]
+        # or try:
         # aggregate_grad /= -torch.sqrt(torch.sum(torch.square(aggregate_grad), dim=(1, 2, 3), keepdim=True))
         aggregate_grad /= self.ensemble_number
         return aggregate_grad
