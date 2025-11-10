@@ -97,6 +97,8 @@ imagenette_transform = T.Compose([
 
 ## Pre-trained Models
 
+The model checkpoints can be downloaded [here](https://drive.google.com/file/d/12o8S2z59kYNYtJEiX9klpq99lfCLt01v/view?usp=drive_link).
+
 ### Caltech-256
 
 | Models              | Packages | Accuracy (%) | Weights                                                                                                     |
@@ -166,3 +168,4 @@ If you find the idea or code useful for your research, please consider citing ou
   publisher={Elsevier}
 }
 ```
+
